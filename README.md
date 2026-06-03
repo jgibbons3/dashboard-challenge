@@ -12,7 +12,7 @@ Make sure you have Node.js installed on your machine:
 
 1. **Clone the repository:**
 ```bash
-git clone [https://github.com/jgibbons3/dashboard-challenge](https://github.com/jgibbons3/dashboard-challenge)
+git clone https://github.com/jgibbons3/dashboard-challenge
 cd dashboard-challenge
 npm install
 npm run dev
