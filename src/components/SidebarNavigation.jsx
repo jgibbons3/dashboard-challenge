@@ -63,7 +63,10 @@ export default function SidebarNavigation() {
 
         {/* HR collapsible section */}
         <div
-          onClick={() => setHrOpen(!hrOpen)}
+          onClick={() => {
+            setHrOpen(!hrOpen);
+            setActiveItem("HR");
+          }}
           style={{
             display: "flex",
             alignItems: "center",
@@ -71,10 +74,13 @@ export default function SidebarNavigation() {
             padding: "9px 20px",
             cursor: "pointer",
             fontSize: 14,
-            color: "#6b7280",
             margin: "1px 8px",
             borderRadius: 8,
             textAlign: "left",
+            background: activeItem === "HR" ? "#F1F5F9" : "transparent",
+            color: activeItem === "HR" ? "#111827" : "#6b7280",
+            fontWeight: activeItem === "HR" ? 600 : 400,
+            transition: "background 0.15s",
           }}
         >
           <Icon.User />
@@ -84,24 +90,38 @@ export default function SidebarNavigation() {
 
         {hrOpen && (
           <div style={{ paddingLeft: 32 }}>
-            {["Dashboard", "Skills", "Team Settings"].map(sub => (
-              <div
-                key={sub}
-                style={{
-                  padding: "7px 20px",
-                  fontSize: 13,
-                  color: "#6b7280",
-                  cursor: "pointer",
-                  textAlign: "left",
-                }}
-              >
-                {sub}
-              </div>
-            ))}
+            {["Dashboard", "Skills", "Team Settings"].map(sub => {
+              const isSubActive = activeItem === sub;
+              return (
+                <div
+                  key={sub}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevents clicking the sub-item from closing the HR menu
+                    setActiveItem(sub);
+                  }}
+                  style={{
+                    padding: "7px 20px",
+                    fontSize: 13,
+                    cursor: "pointer",
+                    textAlign: "left",
+                    borderRadius: 8,
+                    margin: "1px 8px 1px 0",
+                    background: isSubActive ? "#F1F5F9" : "transparent",
+                    color: isSubActive ? "#111827" : "#6b7280",
+                    fontWeight: isSubActive ? 600 : 400,
+                    transition: "background 0.15s",
+                  }}
+                >
+                  {sub}
+                </div>
+              );
+            })}
           </div>
         )}
 
+        {/* Help section */}
         <div
+          onClick={() => setActiveItem("Help")}
           style={{
             display: "flex",
             alignItems: "center",
@@ -109,10 +129,13 @@ export default function SidebarNavigation() {
             padding: "9px 20px",
             cursor: "pointer",
             fontSize: 14,
-            color: "#6b7280",
             margin: "1px 8px",
             borderRadius: 8,
             textAlign: "left",
+            background: activeItem === "Help" ? "#F1F5F9" : "transparent",
+            color: activeItem === "Help" ? "#111827" : "#6b7280",
+            fontWeight: activeItem === "Help" ? 600 : 400,
+            transition: "background 0.15s",
           }}
         >
           <Icon.Help />
